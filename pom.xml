@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Spring Boot manages dependency versions -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>pl.kkaczynski</groupId>
+    <artifactId>voting-system</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>voting-system</name>
+    <description>Multi-module voting system</description>
+
+    <!-- Java + shared versions -->
+    <properties>
+        <java.version>17</java.version>
+        <lombok.version>1.18.36</lombok.version>
+    </properties>
+
+    <!-- Modules -->
+    <modules>
+        <module>voting-domain</module>
+        <module>voting-application</module>
+        <module>voting-jpa</module>
+        <module>voting-web</module>
+    </modules>
+
+    <!-- Central version management for internal modules and Lombok -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Internal modules -->
+            <dependency>
+                <groupId>pl.kkaczynski</groupId>
+                <artifactId>voting-domain</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.kkaczynski</groupId>
+                <artifactId>voting-application</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.kkaczynski</groupId>
+                <artifactId>voting-jpa</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.kkaczynski</groupId>
+                <artifactId>voting-web</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <!-- Lombok (shared) -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Compiler + Lombok annotation processing for all modules -->
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
