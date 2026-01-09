@@ -1,4 +1,4 @@
-package pl.kkaczynski.votingweb;
+package pl.kkaczynski.votingweb.health;
 
 
 import org.springframework.http.HttpStatus;

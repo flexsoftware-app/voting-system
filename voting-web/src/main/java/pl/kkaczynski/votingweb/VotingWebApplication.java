@@ -3,7 +3,7 @@ package pl.kkaczynski.votingweb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "pl.kkaczynski")
 public class VotingWebApplication {
 
     public static void main(String[] args) {
