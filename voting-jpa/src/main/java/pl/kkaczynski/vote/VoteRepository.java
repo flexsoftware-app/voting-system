@@ -1,0 +1,8 @@
+package pl.kkaczynski.vote;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface VoteRepository extends JpaRepository<VoteEntity, Long> {
+
+    boolean existsByElectionIdAndVoterId(Long electionId, Long voterId);
+}
