@@ -1,5 +1,6 @@
 package pl.kkaczynski.election;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ElectionPort {
@@ -9,4 +10,6 @@ public interface ElectionPort {
     Optional<Election> findById(Long id);
 
     boolean exist(Long electionId);
+
+    List<ElectionResult> getElectionResults(Long electionId);
 }

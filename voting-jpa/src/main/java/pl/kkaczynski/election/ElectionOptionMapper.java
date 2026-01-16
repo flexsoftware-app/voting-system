@@ -1,12 +1,14 @@
 package pl.kkaczynski.election;
 
 import io.micrometer.common.util.StringUtils;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
-@Component
-public class ElectionOptionMapper {
-    static ElectionOptionEntity toEntity(ElectionOption electionOption, ElectionEntity election) {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ElectionOptionMapper {
+    public static ElectionOptionEntity toEntity(ElectionOption electionOption, ElectionEntity election) {
         ElectionOptionEntity electionOptionEntity;
         if (StringUtils.isBlank(electionOption.description())) {
             electionOptionEntity = new ElectionOptionEntity(electionOption.name(), election);

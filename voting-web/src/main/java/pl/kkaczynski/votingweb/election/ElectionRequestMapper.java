@@ -1,10 +1,7 @@
 package pl.kkaczynski.votingweb.election;
 
 import org.springframework.stereotype.Component;
-import pl.kkaczynski.election.ElectionOptionCreateCommand;
-import pl.kkaczynski.election.Election;
-import pl.kkaczynski.election.ElectionCreateCommand;
-import pl.kkaczynski.election.ElectionOption;
+import pl.kkaczynski.election.*;
 
 import java.util.List;
 
@@ -29,4 +26,14 @@ public class ElectionRequestMapper {
     ElectionOptionResponse toResponse(ElectionOption electionOption){
         return new ElectionOptionResponse(electionOption.id(), electionOption.name(), electionOption.description());
     }
- }
+
+    List<ElectionResultsResponse> toResponse(List<ElectionResult> electionResults) {
+        return electionResults.stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    ElectionResultsResponse toResponse(ElectionResult electionResult) {
+        return new ElectionResultsResponse(electionResult.electionId(), electionResult.optionId(), electionResult.name(),electionResult.description(),electionResult.votes(), electionResult.totalVotes(), electionResult.getPercentVotes());
+    }
+}

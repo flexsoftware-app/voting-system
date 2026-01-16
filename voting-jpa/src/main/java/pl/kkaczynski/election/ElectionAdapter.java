@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -33,6 +34,14 @@ public class ElectionAdapter implements ElectionPort , ElectionAdapterUtils{
     @Override
     public boolean exist(Long electionId) {
         return electionRepository.existsById(electionId);
+    }
+
+    @Override
+    public List<ElectionResult> getElectionResults(Long electionId) {
+        List<ElectionResultView> results = electionRepository.findResults(electionId);
+        return results.stream()
+                .map(ElectionEntityMapper::toDomain)
+                .toList();
     }
 
     @Override

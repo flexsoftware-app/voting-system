@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ElectionEntityMapper {
 
-    static ElectionEntity toEntity(Election election) {
+    public static ElectionEntity toEntity(Election election) {
         ElectionEntity electionEntity = new ElectionEntity(election.name(), election.selectionType(),election.votingStartsAt(),election.votingEndsAt());
         election.electionOptions().forEach(electionEntity::addElectionOption);
         return electionEntity;
@@ -14,5 +14,9 @@ public final class ElectionEntityMapper {
 
     public static Election toDomain(ElectionEntity election) {
         return new Election(election.getId(), election.getName(),election.getSelectionType(), election.getVotingStartsAt(), election.getVotingEndsAt() , election.getElectionOptions());
+    }
+
+    public static ElectionResult toDomain(ElectionResultView view){
+        return new ElectionResult(view.getElectionId(), view.getOptionId(), view.getName(), view.getDescription(), view.getVotes(), view.getTotalVotes());
     }
 }

@@ -5,10 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ElectionService implements ElectionCreate , ElectionGet, ElectionUtilService {
+public class ElectionService implements ElectionCreate , ElectionGet, ElectionUtilService, ElectionGetResult {
 
     private final ElectionPort electionPort;
     private final ElectionMapper mapper;
@@ -36,5 +37,10 @@ public class ElectionService implements ElectionCreate , ElectionGet, ElectionUt
     @Override
     public boolean exist(@NotNull Long electionId) {
         return electionPort.exist(electionId);
+    }
+
+    @Override
+    public List<ElectionResult> electionResult(Long electionId) {
+        return electionPort.getElectionResults(electionId);
     }
 }
